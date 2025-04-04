@@ -1,4 +1,4 @@
-from hypercrypt import generate_keys, encrypt, decrypt
+from te15 import generate_keys, encrypt, decrypt
 import os
 
 def main():
@@ -24,9 +24,9 @@ def main():
     # Descriptografar
     decrypted = decrypt(encrypted, keys)
     
-    print("Original:", original)
-    print("Criptografado:", encrypted.hex())
-    print("Descriptografado:", decrypted)
+    print("Original:", original, '\n')
+    print("Criptografado:", encrypted.hex(), '\n')
+    print("Descriptografado:", decrypted, '\n')
     print("Sucesso?", decrypted == original)
 
 if __name__ == "__main__":

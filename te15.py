@@ -17,6 +17,11 @@ def unpad_data(data):
 def xor_with_key(block, key):
     return bytes([b ^ key[i % len(key)] for i, b in enumerate(block)])
 
+import os
+import random
+
+# ... (generate_key, generate_keys, pad_data, unpad_data, xor_with_key permanecem iguais)
+
 def rotate_bits(block, key):
     rotated = []
     for i, b in enumerate(block):
@@ -50,10 +55,13 @@ def inverse_substitute(block, key):
     return bytes([generate_inv_sbox(key)[b] for b in block])
 
 def generate_permutation_order(key, block_size):
+    # Seed determinística baseada na chave
+    seed = sum(key) % (2**32)
+    random.seed(seed)
     order = list(range(block_size))
-    for i in range(block_size):
-        key_index = i % len(key)
-        j = (i + key[key_index]) % block_size
+    # Fisher-Yates shuffle para garantir uma permutação válida
+    for i in range(block_size-1, 0, -1):
+        j = random.randint(0, i)
         order[i], order[j] = order[j], order[i]
     return order
 
@@ -63,14 +71,16 @@ def permute(block, key):
 
 def inverse_permute(block, key):
     order = generate_permutation_order(key, len(block))
-    return bytes([block[order.index(i)] for i in range(len(block))])
+    inverse_order = [0] * len(block)
+    for i, pos in enumerate(order):
+        inverse_order[pos] = i
+    return bytes([block[i] for i in inverse_order])
 
 def encrypt_layer(data, key):
     block_size = 16
-    padded = pad_data(data, block_size)
     encrypted = b''
-    for i in range(0, len(padded), block_size):
-        block = padded[i:i+block_size]
+    for i in range(0, len(data), block_size):
+        block = data[i:i+block_size]
         block = xor_with_key(block, key)
         block = rotate_bits(block, key)
         block = substitute(block, key)
@@ -91,6 +101,7 @@ def decrypt_layer(data, key):
     return decrypted
 
 def encrypt(data, keys):
+    data = pad_data(data, 16)  # Padding apenas uma vez
     for key in keys:
         data = encrypt_layer(data, key)
     return data
@@ -98,4 +109,4 @@ def encrypt(data, keys):
 def decrypt(data, keys):
     for key in reversed(keys):
         data = decrypt_layer(data, key)
-    return unpad_data(data)
+    return unpad_data(data)  # Unpadding apenas uma vez

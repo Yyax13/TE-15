@@ -16,7 +16,7 @@ def main():
                 keys.append(f.read())
     
     # Exemplo de uso
-    original = b"Dados ultra secretos que precisam ser protegidos!"
+    original = b"Super Criptografia"
     
     # Criptografar
     encrypted = encrypt(original, keys)

@@ -15,7 +15,7 @@ O **TE-15** é um protocolo de criptografia avançado que utiliza **15 chaves de
 ---
 
 ## **⚙️ Instalação**  
-Nenhuma instalação necessária! Basta incluir o arquivo `hypercrypt.py` em seu projeto.  
+Nenhuma instalação necessária! Basta incluir os arquivos `te15.py` e `te15-cli.py` em seu projeto.  
 
 ```python
 from hypercrypt import generate_keys, encrypt, decrypt
@@ -25,22 +25,7 @@ from hypercrypt import generate_keys, encrypt, decrypt
 
 ## **🔑 Como Usar**  
 
-### **1. Gerando Chaves (15 chaves de 15KB cada)**  
-```python
-keys = generate_keys()  # Gera 15 chaves aleatórias
-```
-
-### **2. Criptografando Dados**  
-```python
-plaintext = b"Dados ultra secretos!"
-ciphertext = encrypt(plaintext, keys)
-```
-
-### **3. Descriptografando Dados**  
-```python
-decrypted_data = decrypt(ciphertext, keys)
-print(decrypted_data)  # Saída: b"Dados ultra secretos!"
-```
+Apenas verifique o arquivo [DOCS](DOCS.md)
 
 ---
 

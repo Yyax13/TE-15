@@ -1,5 +1,6 @@
 from te15 import generate_keys, encrypt, decrypt
 import os
+from yollor import t, c
 
 def main():
     # Gerar ou carregar chaves
@@ -16,7 +17,8 @@ def main():
                 keys.append(f.read())
     
     # Exemplo de uso
-    original = b"Super Criptografia"
+    original = input(f'{t.hashtag_yellow} {c.cyan("Texto a ser criptografado")}: ').encode('utf-8')
+    os.system( 'cls' if os.system == 'nt' else 'clear')
     
     # Criptografar
     encrypted = encrypt(original, keys)
@@ -24,10 +26,10 @@ def main():
     # Descriptografar
     decrypted = decrypt(encrypted, keys)
     
-    print("Original:", original, '\n')
-    print("Criptografado:", encrypted.hex(), '\n')
-    print("Descriptografado:", decrypted, '\n')
-    print("Sucesso?", decrypted == original)
+    print(f"{t.hashtag_yellow} {c.cyan('Original:')}", original, '\n')
+    print(f"{t.hashtag_yellow} {c.cyan('Criptografado:')}", encrypted.hex(), '\n')
+    print(f"{t.hashtag_yellow} {c.cyan('Decriptografado:')}", decrypted, '\n')
+    print(f"{t.quest_red} {c.yellow('Sucesso?')}", decrypted == original)
 
 if __name__ == "__main__":
     main()

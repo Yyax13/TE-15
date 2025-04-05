@@ -17,11 +17,6 @@ def unpad_data(data):
 def xor_with_key(block, key):
     return bytes([b ^ key[i % len(key)] for i, b in enumerate(block)])
 
-import os
-import random
-
-# ... (generate_key, generate_keys, pad_data, unpad_data, xor_with_key permanecem iguais)
-
 def rotate_bits(block, key):
     rotated = []
     for i, b in enumerate(block):

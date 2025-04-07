@@ -15,11 +15,7 @@ O **TE-15** é um protocolo de criptografia avançado que utiliza **15 chaves de
 ---
 
 ## **⚙️ Instalação**  
-Nenhuma instalação necessária! Basta incluir os arquivos `te15.py` e `te15-module.py` em seu projeto.  
-
-```python
-from hypercrypt import generate_keys, encrypt, decrypt
-```
+Nenhuma instalação necessária! Basta incluir o arquivo `te15.py` em seu projeto!
 
 ---
 
